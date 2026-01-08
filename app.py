@@ -13,7 +13,7 @@ st.set_page_config(
 col1, col2 = st.columns([1, 14])
 
 with col1:
-    st.image("imdb-logo.png", width=150)
+    st.image("images/imdb-logo.png", width=150)
 
 with col2:
     st.markdown(
@@ -31,7 +31,7 @@ with col2:
 # --------------------------------------------------
 @st.cache_resource
 def load_recommender():
-    return MovieRecommender("movies_cleaned.csv")
+    return MovieRecommender("data/movies_cleaned.csv")
 
 recommender = load_recommender()
 
