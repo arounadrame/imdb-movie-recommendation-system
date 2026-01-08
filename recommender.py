@@ -4,28 +4,16 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 
 class MovieRecommender:
-    """
-    Content-based movie recommendation system using TF-IDF and cosine similarity.
-    """
 
     def __init__(self, data_path: str):
-        """
-        Initialize the recommender system.
 
-        Parameters
-        ----------
-        data_path : str
-            Path to the cleaned movie dataset.
-        """
         self.df = pd.read_csv(data_path)
         self.tfidf_matrix = None
         self.similarity_matrix = None
         self._build_model()
 
     def _build_model(self):
-        """
-        Build the TF-IDF matrix and compute cosine similarity.
-        """
+        
         tfidf = TfidfVectorizer(
             stop_words="english",
             max_features=5000
@@ -40,21 +28,7 @@ class MovieRecommender:
         self.similarity_matrix = cosine_similarity(self.tfidf_matrix)
 
     def get_recommendations(self, movie_title: str, top_n: int):
-        """
-        Get top-N movie recommendations similar to the given movie.
-
-        Parameters
-        ----------
-        movie_title : str
-            Title of the reference movie.
-        top_n : int, optional
-            Number of recommendations to return (default=5).
-
-        Returns
-        -------
-        pd.DataFrame
-            DataFrame containing recommended movies.
-        """
+        
         if movie_title not in self.df["Series_Title"].values:
             raise ValueError("Movie title not found in dataset.")
 
